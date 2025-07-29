@@ -13,7 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy => {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://localhost:4200",
+                           "https://article-dashboard-noca.netlify.app/")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
