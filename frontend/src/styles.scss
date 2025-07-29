@@ -1,0 +1,53 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$noca-primary-palette: (
+  50: #e8eaf6,
+  100: #c5cae9,
+  200: #9fa8da,
+  300: #7986cb,
+  400: #5c6bc0,
+  500: #3f51b5,
+  600: #3949ab,
+  700: #303f9f,
+  800: #283593,
+  900: #1a237e,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  )
+);
+
+$noca-accent-palette: mat-palette($mat-pink, A200, A100, A400);
+$noca-warn-palette: mat-palette($mat-red);
+
+$noca-theme: mat-light-theme(
+  (
+    color: (
+      primary: mat-palette($noca-primary-palette),
+      accent: $noca-accent-palette,
+      warn: $noca-warn-palette,
+    )
+  )
+);
+
+@include angular-material-theme($noca-theme);
+
+
+html, body { 
+  height: 100%; 
+  background-color: #f4f6f9;
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}

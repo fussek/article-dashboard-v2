@@ -1,0 +1,11 @@
+# General
+.DS_Store
+
+# Node
+/frontend/node_modules
+/frontend/dist
+
+# .NET
+/backend/bin
+/backend/obj
+/backend/articledb.db

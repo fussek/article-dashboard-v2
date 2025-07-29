@@ -1,0 +1,22 @@
+.header-toolbar {
+  background-color: #0a2342; 
+  color: #ffffff; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 64px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 20px;
+}

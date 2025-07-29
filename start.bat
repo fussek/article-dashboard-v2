@@ -1,0 +1,6 @@
+@echo off
+echo Starting Backend API...
+start "Backend" cmd /c "cd backend && dotnet run"
+
+echo Starting Frontend App...
+start "Frontend" cmd /c "cd frontend && ng serve"

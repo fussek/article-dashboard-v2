@@ -1,0 +1,110 @@
+.container {
+  position: relative;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 60px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: #333;
+  }
+}
+
+.table-container {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.filter-icon-button {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+
+  .mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.filter-menu {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-menu-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-menu mat-radio-group,
+.filter-menu mat-selection-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-option {
+  padding: 2px 0;
+  font-size: 14px;
+  height: 36px !important;
+}
+
+.icon-cell-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.add-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.bicycle-category-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  cursor: default;
+}
+
+table.mat-table {
+  width: 100%;
+}

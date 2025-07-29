@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="table-header">
+    <h2>Article Listings</h2>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="exportAs('csv')">Export as .csv</button>
+      <button mat-menu-item (click)="exportAs('json')">Export as .json</button>
+    </mat-menu>
+  </div>
+
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="articles" matSort (matSortChange)="onSortChange($event)">
+
+      <!-- Article Number Column -->
+      <ng-container matColumnDef="articleNumber">
+        <th mat-header-cell *matHeaderCellDef>Article Number</th>
+        <td mat-cell *matCellDef="let element">{{element.articleNumber}}</td>
+      </ng-container>
+
+      <!-- Article Category Column -->
+      <ng-container matColumnDef="articleCategory">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="filter-header">
+            <span>Category</span>
+            <button mat-icon-button [matMenuTriggerFor]="categoryMenu" class="filter-icon-button">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+            <mat-menu #categoryMenu="matMenu">
+              <div class="filter-menu" (click)="$event.stopPropagation()">
+                <div class="filter-menu-title">Filter by Category</div>
+                <mat-radio-group [formControl]="articleCategoryControl" color="primary">
+                  <mat-radio-button class="filter-option" value="">All</mat-radio-button>
+                  <mat-radio-button class="filter-option" *ngFor="let cat of articleCategories"
+                    [value]="cat">{{cat}}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </mat-menu>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="icon-cell-content">
+            <img [src]="getIcon(element.articleCategory)" class="category-icon" />
+            <span>{{element.articleCategory}}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <!-- Bicycle Category Column with Badges -->
+      <ng-container matColumnDef="bicycleCategory">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="filter-header">
+            <span>Bicycle Category</span>
+            <button mat-icon-button [matMenuTriggerFor]="bicycleCategoryMenu" class="filter-icon-button">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+            <mat-menu #bicycleCategoryMenu="matMenu">
+              <div class="filter-menu" (click)="$event.stopPropagation()">
+                <div class="filter-menu-title">Filter by Bicycle Category</div>
+                <div class="filter-menu-actions">
+                  <button mat-button (click)="resetBicycleCategoryFilter()">Reset</button>
+                </div>
+                <mat-selection-list [formControl]="bicycleCategoriesControl" color="primary">
+                  <mat-list-option class="filter-option" *ngFor="let cat of bicycleCategories"
+                    [value]="cat">{{cat}}</mat-list-option>
+                </mat-selection-list>
+
+              </div>
+            </mat-menu>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="badge-container">
+            <span *ngFor="let badge of getBicycleCategoryBadges(element.bicycleCategory)" class="bicycle-category-badge"
+              [matTooltip]="badge.fullName" [ngStyle]="{'background-color': badge.color, 'color': '#333'}">
+              {{ badge.abbr }}
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Material Column -->
+      <ng-container matColumnDef="material">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="filter-header">
+            <span>Material</span>
+            <button mat-icon-button [matMenuTriggerFor]="materialMenu" class="filter-icon-button">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+            <mat-menu #materialMenu="matMenu">
+              <div class="filter-menu" (click)="$event.stopPropagation()">
+                <div class="filter-menu-title">Filter by Material</div>
+                <mat-radio-group [formControl]="materialControl" color="primary">
+                  <mat-radio-button class="filter-option" value="">All</mat-radio-button>
+                  <mat-radio-button class="filter-option" *ngFor="let mat of materials"
+                    [value]="mat">{{mat}}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </mat-menu>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">{{element.material}}</td>
+      </ng-container>
+
+      <!-- Net Weight Column -->
+      <ng-container matColumnDef="netWeightInGram">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="netweight">Weight (g)</th>
+        <td mat-cell *matCellDef="let element">{{element.netWeightInGram}}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="openArticleDialog(element.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteArticle(element.id, element.name)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="add-button-container">
+    <button mat-flat-button color="primary" (click)="openArticleDialog()">
+      <mat-icon>add</mat-icon>
+      Add New Article
+    </button>
+  </div>
+</div>

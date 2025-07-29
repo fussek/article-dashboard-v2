@@ -1,0 +1,73 @@
+// Styles for the dialog icon
+.dialog-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dialog-icon {
+  width: 100px;
+  height: 100px;
+}
+
+// Main form layout
+.vertical-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+}
+
+.form-label {
+  font-size: 14px;
+  color: #555;
+  text-align: right;
+  margin-right: 16px;
+  margin-bottom: 15px;
+}
+
+.form-field {
+  width: 100%;
+  font-size: 14px;
+}
+
+// --- Styles for dropdown icons ---
+.option-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-option-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+// Style the error message directly
+mat-error {
+  font-size: 12px;
+}
+
+::ng-deep .form-field .mat-form-field-wrapper {
+  margin-right: 40px !important;
+  padding-bottom: 1.25em !important;
+}
+
+::ng-deep .form-field .mat-form-field-infix {
+  padding: 0.4em 0 !important;
+}
+
+::ng-deep .form-field.mat-form-field-appearance-outline .mat-form-field-label-wrapper {
+  top: -1em;
+}
