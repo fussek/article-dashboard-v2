@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using backend.Data;
+using backend.Data; // Ensure this is present
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 1. Configure the database connection
 builder.Services.AddDbContext<ApiDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -13,10 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy => {
-        policy.WithOrigins("http://localhost:4200",
-                           "https://article-dashboard-noca.netlify.app/")
+        policy.WithOrigins("http://localhost:4200") 
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .SetIsOriginAllowed(origin => true)
+              .AllowCredentials();
     });
 });
 
