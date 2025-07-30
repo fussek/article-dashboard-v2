@@ -1,8 +1,16 @@
 .container {
   position: relative;
-  padding-left: 120px;
-  padding-right: 120px;
   padding-top: 60px;
+  
+  // Default padding for mobile devices
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media (min-width: 768px) {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
 }
 
 .table-header {
@@ -21,8 +29,8 @@
 
 .table-container {
   border-radius: 8px;
-  overflow: hidden;
   border: 1px solid #e0e0e0;
+  overflow-x: auto;
 }
 
 .filter-header {
@@ -107,4 +115,5 @@
 
 table.mat-table {
   width: 100%;
+  min-width: 800px;
 }
