@@ -13,15 +13,15 @@
   <div class="table-container mat-elevation-z8">
     <table mat-table [dataSource]="articles" matSort (matSortChange)="onSortChange($event)">
 
-      <!-- Article Number Column -->
+      <!-- Article Number Column with Sorting -->
       <ng-container matColumnDef="articleNumber">
-        <th mat-header-cell *matHeaderCellDef>Article Number</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="articlenumber">Article Number</th>
         <td mat-cell *matCellDef="let element">{{element.articleNumber}}</td>
       </ng-container>
 
-      <!-- Article Category Column -->
+      <!-- Article Category Column with Sorting and Filtering -->
       <ng-container matColumnDef="articleCategory">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="category">
           <div class="filter-header">
             <span>Category</span>
             <button mat-icon-button [matMenuTriggerFor]="categoryMenu" class="filter-icon-button">
@@ -47,9 +47,9 @@
         </td>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- Name Column with Sorting -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Name</th>
         <td mat-cell *matCellDef="let element">{{element.name}}</td>
       </ng-container>
 
@@ -71,7 +71,6 @@
                   <mat-list-option class="filter-option" *ngFor="let cat of bicycleCategories"
                     [value]="cat">{{cat}}</mat-list-option>
                 </mat-selection-list>
-
               </div>
             </mat-menu>
           </div>

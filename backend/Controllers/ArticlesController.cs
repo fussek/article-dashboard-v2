@@ -18,7 +18,6 @@ public class ArticlesController : ControllerBase
         _context = context;
     }
 
-    // GET: api/articles (with filtering, sorting, pagination)
     [HttpGet]
     public async Task<IActionResult> GetArticles(
         [FromQuery] string? articleCategory,
@@ -31,7 +30,6 @@ public class ArticlesController : ControllerBase
     {
         var query = _context.Articles.AsQueryable();
 
-        // Filtering
         if (!string.IsNullOrEmpty(articleCategory))
             query = query.Where(a => a.ArticleCategory == articleCategory);
         
@@ -56,18 +54,30 @@ public class ArticlesController : ControllerBase
             query = query.Where(predicate);
         }
 
-        // Sorting
         if (!string.IsNullOrEmpty(sortBy))
         {
             switch (sortBy.ToLower())
             {
-                case "netweight":
-                    query = isDescending ? query.OrderByDescending(a => a.NetWeightInGram) : query.OrderBy(a => a.NetWeightInGram);
+                case "articlenumber":
+                    query = isDescending ? query.OrderByDescending(a => a.ArticleNumber) : query.OrderBy(a => a.ArticleNumber);
+                    break;
+                case "name":
+                    query = isDescending ? query.OrderByDescending(a => a.Name) : query.OrderBy(a => a.Name);
                     break;
                 case "category":
                     query = isDescending ? query.OrderByDescending(a => a.ArticleCategory) : query.OrderBy(a => a.ArticleCategory);
                     break;
+                case "netweight":
+                    query = isDescending ? query.OrderByDescending(a => a.NetWeightInGram) : query.OrderBy(a => a.NetWeightInGram);
+                    break;
+                default:
+                     query = query.OrderBy(a => a.Name);
+                    break;
             }
+        }
+        else
+        {
+            query = query.OrderBy(a => a.Name);
         }
         
         // Pagination
@@ -79,7 +89,6 @@ public class ArticlesController : ControllerBase
         return Ok(articles);
     }
     
-    // GET: api/articles/{id}
     [HttpGet("{id}")]
     public async Task<IActionResult> GetArticle(Guid id)
     {
@@ -88,8 +97,6 @@ public class ArticlesController : ControllerBase
         return Ok(article);
     }
 
-
-    // POST: api/articles
     [HttpPost]
     public async Task<IActionResult> CreateArticle(CreateArticleDto dto)
     {
@@ -100,14 +107,16 @@ public class ArticlesController : ControllerBase
             ArticleCategory = dto.ArticleCategory,
             BicycleCategory = dto.BicycleCategory ?? "",
             Material = dto.Material,
-            NetWeightInGram = dto.NetWeightInGram
+            NetWeightInGram = dto.NetWeightInGram,
+            LengthInMm = dto.LengthInMm,
+            WidthInMm = dto.WidthInMm,
+            HeightInMm = dto.HeightInMm
         };
         _context.Articles.Add(article);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetArticle), new { id = article.Id }, article);
     }
 
-    // PUT: api/articles/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateArticle(Guid id, CreateArticleDto dto)
     {
@@ -120,11 +129,14 @@ public class ArticlesController : ControllerBase
         article.BicycleCategory = dto.BicycleCategory ?? "";
         article.Material = dto.Material;
         article.NetWeightInGram = dto.NetWeightInGram;
+        article.LengthInMm = dto.LengthInMm;
+        article.WidthInMm = dto.WidthInMm;
+        article.HeightInMm = dto.HeightInMm;
 
         await _context.SaveChangesAsync();
         return NoContent();
     }
-
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArticle(Guid id)
     {
