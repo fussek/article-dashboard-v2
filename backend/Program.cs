@@ -32,11 +32,9 @@ using (var scope = app.Services.CreateScope())
     DataSeeder.Seed(context);
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Enable Swagger in all environments (Development and Production)
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("AllowAngularApp");
 app.UseAuthorization();
