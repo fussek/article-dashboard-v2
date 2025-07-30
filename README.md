@@ -1,7 +1,7 @@
 # Article Management Dashboard
 
 <p align="center">
-  <img src="frontend/src/assets/NOCA_logo_White_transpareent-300x300.png" alt="NOCA Logo" width="150"/>
+  <img src="frontend/src/assets/NOCA_logo.png" alt="NOCA Logo" width="150"/>
 </p>
 <p align="center">
   A full-stack web application for managing bicycle component articles, built with Angular and .NET 6.
@@ -14,6 +14,7 @@
 * **Frontend (Netlify):** [https://article-dashboard-noca.netlify.app/](https://article-dashboard-noca.netlify.app/)
 * **Backend API (Render):** [https://article-dashboard-v2.onrender.com/swagger](https://article-dashboard-v2.onrender.com/swagger)
 
+<br>
 <p>
   <img src="frontend/src/assets/dashboard.png" alt="NOCA Logo" width="800"/>
 </p>
